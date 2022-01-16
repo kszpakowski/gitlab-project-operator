@@ -35,6 +35,7 @@ type GitlabSpec struct {
 type GitlabStatus struct {
 	// INSERT ADDITIONAL STATUS FIELD - define observed state of cluster
 	// Important: Run "make" to regenerate code after modifying this file
+	Version string `json:"version"`
 }
 
 //+kubebuilder:object:root=true
@@ -45,7 +46,7 @@ type Gitlab struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
-	Spec   GitlabSpec   `json:"spec,omitempty"`
+	Spec   GitlabSpec   `json:"spec"`
 	Status GitlabStatus `json:"status,omitempty"`
 }
 

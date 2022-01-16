@@ -25,6 +25,7 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/log"
 
 	gitlabv1alpha1 "github.com/kszpakowski/gitlab-project-operator/api/v1alpha1"
+	gitlabapi "github.com/xanzy/go-gitlab"
 )
 
 // GitlabReconciler reconciles a Gitlab object
@@ -47,9 +48,32 @@ type GitlabReconciler struct {
 // For more details, check Reconcile and its Result here:
 // - https://pkg.go.dev/sigs.k8s.io/controller-runtime@v0.10.0/pkg/reconcile
 func (r *GitlabReconciler) Reconcile(ctx context.Context, req ctrl.Request) (ctrl.Result, error) {
-	_ = log.FromContext(ctx)
+	log := log.FromContext(ctx)
 
 	// your logic here
+	gitlab := &gitlabv1alpha1.Gitlab{}
+	err := r.Get(ctx, req.NamespacedName, gitlab)
+	if err != nil {
+		log.Error(err, "Failed to get Gitlab")
+		return ctrl.Result{}, err
+	}
+
+	log.Info("Found gitlab instance:", "Instance name", gitlab.Spec.Name)
+
+	//git, err := gitlab.NewClient("yourtokengoeshere", gitlab.WithBaseURL("https://git.mydomain.com/api/v4"))
+	apiClient, err := gitlabapi.NewClient(gitlab.Spec.ApiToken)
+	if err != nil {
+		log.Error(err, "Unable to connect to gitlab")
+	}
+
+	version, _, err := apiClient.Version.GetVersion()
+	if err != nil {
+		log.Error(err, "Unable to get gitlab version")
+	}
+
+	log.Info(version.String())
+
+	gitlab.Status.Version = version.String()
 
 	return ctrl.Result{}, nil
 }
