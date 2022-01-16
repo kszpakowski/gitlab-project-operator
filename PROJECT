@@ -6,4 +6,14 @@ plugins:
   scorecard.sdk.operatorframework.io/v2: {}
 projectName: gitlab-project-operator
 repo: github.com/kszpakowski/gitlab-project-operator
+resources:
+- api:
+    crdVersion: v1
+    namespaced: true
+  controller: true
+  domain: kszpakowski.com
+  group: gitlab
+  kind: Project
+  path: github.com/kszpakowski/gitlab-project-operator/api/v1alpha1
+  version: v1alpha1
 version: "3"
