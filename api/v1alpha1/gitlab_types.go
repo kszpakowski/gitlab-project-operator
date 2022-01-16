@@ -20,16 +20,15 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 )
 
-// EDIT THIS FILE!  THIS IS SCAFFOLDING FOR YOU TO OWN!
-// NOTE: json tags are required.  Any new fields you add must have json tags for the fields to be serialized.
-
-// GitlabSpec defines the desired state of Gitlab
 type GitlabSpec struct {
-	// INSERT ADDITIONAL SPEC FIELDS - desired state of cluster
-	// Important: Run "make" to regenerate code after modifying this file
+	// Name of the gitlab instance
+	Name string `json:"name"`
 
-	// Foo is an example field of Gitlab. Edit gitlab_types.go to remove/update
-	Foo string `json:"foo,omitempty"`
+	// Gitlab instance url
+	Url string `json:"url"`
+
+	// Gitlab API access token
+	ApiToken string `json:"apiToken"`
 }
 
 // GitlabStatus defines the observed state of Gitlab

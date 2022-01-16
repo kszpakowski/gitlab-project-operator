@@ -34,12 +34,20 @@ spec:
           metadata:
             type: object
           spec:
-            description: GitlabSpec defines the desired state of Gitlab
             properties:
-              foo:
-                description: Foo is an example field of Gitlab. Edit gitlab_types.go
-                  to remove/update
+              apiToken:
+                description: Gitlab API access token
                 type: string
+              name:
+                description: Name of the gitlab instance
+                type: string
+              url:
+                description: Gitlab instance url
+                type: string
+            required:
+            - apiToken
+            - name
+            - url
             type: object
           status:
             description: GitlabStatus defines the observed state of Gitlab
