@@ -1,4 +1,5 @@
 ## Append samples you want in your CSV to this file as resources ##
 resources:
 - gitlab_v1alpha1_project.yaml
+- gitlab_v1alpha1_gitlab.yaml
 #+kubebuilder:scaffold:manifestskustomizesamples

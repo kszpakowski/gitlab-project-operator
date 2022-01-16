@@ -1,0 +1,6 @@
+apiVersion: gitlab.kszpakowski.com/v1alpha1
+kind: Gitlab
+metadata:
+  name: gitlab-sample
+spec:
+  # Add fields here
